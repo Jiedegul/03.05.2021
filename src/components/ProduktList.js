@@ -4,12 +4,12 @@ import {connect} from "react-redux";
 import ProductItem from "./ProductItem"
 
 
-const ProduktList = ({state}) => {
+const ProduktList = ({products}) => {
     return (
         <div>
             <h1>Salam</h1>
             <div className="row mb-4">
-                {state.map((item) => (
+                {products.map((item) => (
                     
                     <ProductItem key={item.id} item={item}/>
                 ))}
@@ -17,8 +17,8 @@ const ProduktList = ({state}) => {
         </div>
     );
 };
-const msp = (state) =>{
-return {state}
+const msp = ({products}) =>{
+return {products}
 }
 
 export default connect(msp)(ProduktList);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {useParams} from 'react-router-dom';
+import {addToCart} from "../actions/cart"
 
-const ProductDatail = ({state}) => {
+const ProductDatail = ({products,addToCart}) => {
     const {id} = useParams()
-    const product = state.find((item)=>item.id==id)
+    const product = products.find((item)=>item.id==id)
     return (
         <div>
             <h1>{product.title}</h1>
@@ -20,7 +21,7 @@ const ProductDatail = ({state}) => {
                 <span className="mr-2 text-danger font-weight-bold">
                     PRICE: {product.PRICE}
                 </span>
-                <button className="btn btn-primary">
+                <button onClick={()=>addToCart(product)} className="btn btn-primary">
                     Купить
                 </button>
             </p>
@@ -29,7 +30,7 @@ const ProductDatail = ({state}) => {
          </div>
     );
 };
-const msp=(state)=>{
-    return {state}
+const msp=({products})=>{
+    return {products}
 }
-export default connect(msp)( ProductDatail);
+export default connect(msp,{addToCart})( ProductDatail);
